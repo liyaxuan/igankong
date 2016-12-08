@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		<title>感控端首页</title>
+		<meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+	</head>
+	<body>
+		<div class="container">
+			<div class="header">
+				<div class="fl">
+					<div>脊柱外科: 排名<span class="glyphicons glyphicons-arrow-down"></span></div>
+					<div>颌面外科: 排名<span class="glyphicons glyphicons-arrow-down"></span></div>
+					<div>消化外科: 排名<span class="glyphicons glyphicons-arrow-down"></span></div>
+				</div>
+				<div class="circle fr">4.8%</div>
+				<div class="cf"></div>
+			</div>
+
+			<div class="block">
+				<div class="header">概览</div>
+				<div class="body overview">
+					<div class="item">在科: {{zk}}人</div>
+					<div class="item">感染患者: {{gr}}人</div>
+					<div class="item">触隔离: {{gl}}人</div>
+				</div>
+			</div>
+			<div class="block">
+				<div class="header">易感因素</div>
+				<div class="body factor">
+					<div class="item" v-for="(item, index) in factors">{{item}}</div>
+				</div>
+			</div>
+			<div class="block">
+				<div class="header">工作复查</div>
+				<div class="body">
+					<index-list :list="review"></index-list>
+				</div>
+			</div>
+			<div class="block">
+				<div class="header">工作提醒</div>
+				<div class="body">
+					<index-list :list="remind"></index-list>
+				</div>
+			</div>
+		
+			<div class="bottom-button-group">
+				<a class="button left" href="notice.html">通知<div class="mark arc">{{noticeNumber}}</div></a>
+				<a class="button left" href="plan.html">制定计划</a>
+				<a class="button left" href="hand.html">手卫生</a>
+				<a class="button" href="exposure_index.html">职业暴露<div class="mark rect">复查</div></a>
+			</div>			
+		</div>
+		<script src="dist/index.dist.js"></script>
+	</body>
+</html>
+
+
+
+
+
+
+
+

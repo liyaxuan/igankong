@@ -1,0 +1,84 @@
+@import './common.less';
+@import './variable.less';
+
+.container {
+	>.header {
+		margin-bottom: 8px;
+	}	
+}
+
+.nav {
+	margin-bottom: 8px;
+	display: flex;
+	display: -webkit-flex;
+	justify-content: space-between;
+
+	>.item {
+		padding: 4px;
+		padding-right: 24px;
+		border: 1px solid @gray;
+		border-radius: 28px;
+
+		display: flex;
+		display: -webkit-flex;
+		align-items: center;
+
+		>.icon-container {
+			width: 48px;
+			height: 48px;
+			margin-right: 8px;
+			background-color: #000000;
+			border-radius: 50%;
+			text-align: center;
+
+			>.iconfont {
+				line-height: 48px;
+				font-size: 24px;
+				color: #ffffff;
+			}		
+		}
+	}
+}
+
+.block {
+	margin-bottom: 8px;
+	>.item {
+		margin-bottom: 8px;
+		&.last {
+			margin-bottom: 0;
+		}
+		>.text {
+			height: 24px;
+			line-height: 24px;
+		}
+
+		>.button {
+			height: 16px;
+			line-height: 16px;
+			padding: 8px;
+			background-color: #5eb737;
+			border-radius: 4px;
+			text-align: center;
+			color: #ffffff;
+		}
+
+		&.history {
+			padding: 8px;
+			border: 1px solid #a0a0a0;
+			border-radius: 4px;
+
+			>.overview {
+				height: 16px;
+				line-height: 16px;
+				padding-bottom: 8px;
+				display: flex;
+				display: -webkit-flex;
+				justify-content: space-between;
+				border-bottom: 1px solid #a0a0a0;
+			}
+			>.detail {
+				line-height: 24px;
+			}
+		}
+	}
+}

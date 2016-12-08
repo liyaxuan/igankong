@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<title>report</title>
+		<meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+	</head>
+	<body>
+		<div class="vue-container">
+			<div class="title">请问你有无异常症状?</div>
+			<div class="option-group">
+				<div class="option right" v-on:click="isSymptom = 1" v-bind:class="{ 'selected': isSymptom == 1 }">有症状</div>
+				<div class="option" v-on:click="isSymptom = 0" v-bind:class="{ 'selected': isSymptom == 0 }">无症状</div>				
+			</div>
+
+			<textarea class="textarea" v-model="description" name="" id="" cols="30" rows="10"></textarea>
+			<div class="bottom-button-group">
+				<a class="button right" href="exposure_index.html">返回</a>
+				<div class="button" v-on:click="submit">提交</div>
+			</div>			
+		</div>
+		<script src="dist/report.dist.js"></script>
+	</body>
+</html>

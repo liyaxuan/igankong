@@ -1,0 +1,46 @@
+<template>
+	<div class="checkbox-list">
+		<div class="item" v-for="item in list">
+			<div class="checkbox" v-bind:class="{ 'selected': item.isSelected, 'arc': type == 'arc', 'green': color == 'green' }">
+				<div class="inner"></div>
+			</div>
+			<div>{{item.content}}</div>
+		</div>
+	</div>
+</template>
+<style lang="less" scoped>
+	@import '../less/common.less';
+
+	.checkbox-list {
+		display: flex;
+		display: -webkit-flex;
+		flex-wrap: wrap;
+
+		>.item {
+			display: flex;
+			display: -webkit-flex;
+			flex-wrap: wrap;
+			align-items: center;
+			
+			margin-right: 8px;
+			margin-bottom: 8px;
+
+			.checkbox {
+				margin-right: 8px;
+			}
+
+			.text {
+				height: 24px;
+				line-height: 24px;
+			}			
+		}
+	}
+</style>
+<script>
+	export default {
+		props: ['list', 'color', 'type'],
+		data: function () {
+			return {};
+		}
+	}
+</script>

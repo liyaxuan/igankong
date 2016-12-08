@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<title>手卫生检查</title>
+		<meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+	</head>
+	<body>
+		<div class="container">
+			<div class="select-group">
+				<department-select v-on:department-changed="departmentChangedHandler"></department-select>
+			</div>
+			<div class="block green">
+				<div class="arc" v-on:click="currentCharacterIndex = index" v-for="(item, index) in character" v-bind:class="{ 'selected': index == currentCharacterIndex }"><div class="text">{{item}}</div></div>
+			</div>
+
+			<div class="block red">
+				<div class="arc" v-on:click="currentTimeIndex = index" v-for="(item, index) in behavior" v-bind:class="{ 'selected': index == currentTimeIndex }"><div class="text">{{item.name}}</div></div>
+			</div>
+
+			<div class="block blue" v-for="(item, index) in behavior" v-show="index == currentTimeIndex">
+				<div class="left">
+					<div class="arc" v-bind:class="{ 'selected': item.isUnwashed }" v-on:click="toggleUnwashed(index)"><div class="text">未洗手</div></div>
+					<div class="arc" v-bind:class="{ 'yes': item.glove == 1, 'no': item.glove == 2 }" v-show="item.isUnwashed" v-on:click="item.glove = (item.glove + 1)%3"><div class="text">{{item.glove | glove}}</div></div>					
+				</div>
+				<div class="right">
+					<div class="arc" v-bind:class="{ 'selected': item.isSoap }" v-on:click="item.isSoap = !item.isSoap"><div class="text">肥皂/冲水</div></div>
+					<div class="arc" v-bind:class="{ 'selected': item.isSanitizer }" v-on:click="item.isSanitizer = !item.isSanitizer"><div class="text">洗手液</div></div>
+					<div class="arc" v-bind:class="{ 'yes': item.sixStep == 1, 'no': item.sixStep == 2 }" v-on:click="item.sixStep = (item.sixStep + 1)%3"><div class="text">六部正确法</div></div>					
+				</div>
+			</div>
+			<div class="signature-line">
+				<div class="tag fl">需要时请被检人签字</div>
+				<div class="button fl" v-on:click="showCanvas">签字</div>
+				<div class="cf"></div>
+			</div>
+			<div class="bottom-button-group">
+				<a class="button left" href="index.html">返回</a>
+				<div class="button" v-on:click="submit">确定</div>
+			</div>
+
+			<signature-canvas v-on:signature-closed="signatureClosed" v-on:signature-finished="signatureFinished" :is-show="isCanvasShow"></signature-canvas>			
+		</div>
+
+		
+		<script src="dist/hand.dist.js"></script>
+	</body>
+</html>

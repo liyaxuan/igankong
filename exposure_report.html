@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<title>上报</title>
+		<meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+	<body>
+		<div class="container">
+			<div class="block">
+				<div class="header">基本信息</div>
+				<div class="body">
+					<exposure-basic :id="id" :read-only="basicReadOnly"></exposure-basic>
+				</div>
+			</div>
+			<div class="block">
+				<div class="header">本底信息</div>
+				<div class="body">
+					<exposure-self :id="id"></exposure-self>
+				</div>
+			</div>
+			<div class="block">
+				<div class="header">暴露源情况</div>
+				<div class="body">
+					<exposure-source :id="id"></exposure-source>
+				</div>
+			</div>
+
+			<div class="block" v-show="type == 1">
+				<div class="header">体液血液暴露</div>
+				<div class="body">
+					<exposure-blood :id="id"></exposure-source>
+				</div>
+			</div>
+
+			<div class="block" v-show="type == 2">
+				<div class="header">锐器伤暴露</div>
+				<div class="body">
+					<exposure-wound :id="id"></exposure-source>
+				</div>
+			</div>
+
+			<div class="block" v-show="type == 2">
+				<div class="header">其他</div>
+				<div class="body">
+					<exposure-other :id="id"></exposure-source>
+				</div>
+			</div>	
+
+			<div class="block">
+				<div class="header">评估职业暴露事件</div>
+				<div class="body">
+					<exposure-assess :id="id"></exposure-assess>
+				</div>
+			</div>
+		</div>
+		<script src="dist/exposure_report.dist.js"></script>
+	</body>
+</html>

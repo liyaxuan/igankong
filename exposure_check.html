@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<title>感染源检查</title>
+		<meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+	</head>
+	<body>
+		<div class="container">
+			<div class="tag-header green">上报检查结果</div>
+			<div class="block layout">
+				今天检查的(仅打钩即可)
+				<div class="checkbox green" v-on:click="isInputDisabled = !isInputDisabled" v-bind:class="{ 'selected': isInputDisabled }"><div class="inner"></div></div>
+			</div>
+			<div class="block layout">
+				或选择时间
+				<input class="text-input" type="date" v-model="date" v-bind:disabled="isInputDisabled">
+			</div>
+			<div class="block layout">检查结果</div>
+			<virus-list :list="virus" color="green"></virus-list>
+			<div class="bottom-button-group">
+				<a class="button left" href="index.html">返回</a>
+				<div class="button" v-on:click="submit">提交</div>
+			</div>	
+		</div>
+		<script src="dist/exposure_check.dist.js"></script>
+	</body>
+</html>

@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>职业暴露</title>
+        <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+        <link rel="stylesheet" href="lib/iconfont/iconfont.css">
+    </head>
+    <body>
+        <div class="container">
+            <div class="header">本年度累积发生职业暴露{{total}}例, 其中锐器伤{{wound}}例, 血液体液暴露{{blood}}例</div>
+            <div class="nav">
+                <div class="item">
+                    <div class="icon-container">
+                        <i class="iconfont">&#xe621;</i>
+                    </div>                  
+                    <div class="text">利器上报</div>
+                </div>
+                <div class="item">
+                    <div class="icon-container">
+                        <i class="iconfont">&#xe620;</i>
+                    </div>            
+                    <div class="text">血体液上报</div>
+                </div>
+                <a class="item" href="exposure_history.html">
+                    <div class="icon-container">
+                        <i class="iconfont">&#xe793;</i>
+                    </div>
+                    <div class="text">暴露历史</div>
+                </a>
+            </div>
+            <div class="block">
+                <div class="tag-header green">确认暴露</div>
+                <div class="item" v-for="(item, index) in review" v-bind:class="{ 'last': index == review.length - 1 }">
+                    <div class="text fl">{{item.content}}</div>
+                    <a class="button fr" v-bind:href="item.href">查看</a>
+                    <div class="cf"></div>
+                </div>            
+            </div>
+
+            <div class="block">
+                <div class="tag-header green">提醒事件</div>
+                <div class="item" v-for="(item, index) in remind" v-bind:class="{ 'last': index == remind.length - 1 }">
+                    <div class="text fl">{{item.content}}</div>
+                    <a class="button fr" v-bind:href="item.href">{{item.buttonText}}</a>
+                    <div class="cf"></div>
+                </div>            
+            </div>
+
+            <div class="block">
+                <div class="tag-header green">个人暴露历史</div>
+                <exposure-history></exposure-history>        
+            </div>            
+        </div>
+        <script src="dist/exposure_index.dist.js"></script>
+    </body>
+</html>

@@ -1,0 +1,40 @@
+@import './variable.less';
+
+.title {
+	margin-bottom: 8px;
+}
+
+.option-group {
+	margin-bottom: 8px;
+	dipslay: flex;
+	display: -webkit-flex;
+}
+
+.option {
+	height: 16px;
+	line-height: 16px;
+	padding: 8px;
+	border: 1px solid @green;
+	border-radius: 4px;
+
+	flex-grow: 1;
+	text-align: center;
+
+	&.selected {
+		background-color: @green;
+		color: #ffffff;
+	}
+}
+
+.textarea {
+	box-sizing: border-box;
+	width: 100%;
+	margin-bottom: 8px;
+	padding: 8px;
+	border: 1px solid @green;
+	border-radius: 4px;
+}
+
+.right {
+	margin-right: 8px;
+}

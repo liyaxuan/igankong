@@ -1,0 +1,128 @@
+.color(@color) {
+	border: 1px solid @color;
+
+	.header {
+		position: absolute;
+		left: 0;
+		top: -16px;
+		flex-basis: 0;
+
+		background-color: #fffff;
+		color: @color;
+	}
+
+	.arc {
+		width: 48px;
+		height: 48px;
+		padding: 8px;
+
+		margin-bottom: 8px;
+
+		&.selected {
+			background-color: @color;
+			border: 1px solid @color;
+			color: #ffffff;		
+		}
+
+		&.yes {
+			background-color: #00b9e7;
+			border: 1px solid #00b9e7;
+			color: #ffffff;				
+		}
+
+		&.no {
+			background-color: #f299af;
+			border: 1px solid #f299af;
+			color: #ffffff;
+		}
+
+		background-color: #ffffff;
+		border: 1px solid #c4c4c4;
+		color: #000000;		
+
+		border-radius: 50%;
+
+		text-align: center;
+		
+		display: table;
+
+		>.text {
+			display: table-cell;
+			vertical-align: middle;
+		}
+	}
+}
+
+.select-group {
+	margin-bottom: 8px;
+
+	div {
+		display: flex;
+		display: -webkit-flex;
+		justify-content: space-between;
+	}
+
+	select {
+		width: 48%;
+		height: 32px;
+		line-height: 32px;
+		display: block;
+	}
+}
+
+.block {
+	margin-bottom: 8px;
+	padding: 8px;
+	padding-bottom: 0;
+	position: relative;
+	border-radius: 4px;
+
+	display: flex;
+	display: -webkit-flex;
+	justify-content: space-between;
+	flex-wrap: wrap;
+
+	&.green {
+		.color(#5dc12d);
+	}
+
+	&.red {
+		.color(#f299af);
+	}
+
+	&.blue {
+		.color(#00b9e7);
+	}
+
+	>.left {
+		width: 100%;
+		display: flex;
+		display: -webkit-flex;
+	}
+
+	>.right {
+		width: 100%;
+		display: flex;
+		display: -webkit-flex;	
+	}
+}
+
+.signature-line {
+	height: 34px;
+	line-height: 34px;
+	margin-bottom: 8px;
+	padding: 8px;
+
+	border-top: 1px solid #9f9f9f;
+	border-bottom: 1px solid #9f9f9f;
+
+	>.button {
+		height: 16px;
+		line-height: 16px;
+		margin-left: 16px;
+		padding: 8px 16px;
+		border: 1px solid #60c02b;
+		border-radius: 4px;
+		color: #60c02b;
+	}
+}

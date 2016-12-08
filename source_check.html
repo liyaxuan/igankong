@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<title>暴露源检查结果</title>
+		<meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+	</head>
+	<body>
+		<div class="container">
+			<div class="sub-header green">暴露源检查结果</div>
+			<div class="block layout">
+				<input class="text-input grow" type="text" placeholder="患者姓名" v-model="name">
+				<div class="rect-option equal green" v-on:click="gender = 1" v-bind:class="{ 'selected': gender == 1 }">男</div>
+				<div class="rect-option equal green" v-on:click="gender = 2" v-bind:class="{ 'selected': gender == 2 }">女</div>
+			</div>
+			<div class="block layout">
+				<input class="text-input grow" type="text" placeholder="年龄" v-model="age">
+			</div>
+			<div class="block layout">
+				<input class="text-input grow" type="text" placeholder="住院号" v-model="no">
+			</div>
+			<div class="block layout">
+				<input class="text-input grow" type="text" placeholder="联系电话" v-model="phone">
+			</div>
+			<div class="block layout">
+				今天检查的(仅打钩即可)
+				<div class="checkbox green" v-on:click="isInputDateDisabled = !isInputDateDisabled" v-bind:class="{ 'selected': isInputDateDisabled }"><div class="inner"></div></div>
+			</div>
+			<div class="block layout">
+				或选择时间
+				<input class="text-input" type="date" v-model="date" v-bind:disabled="isInputDateDisabled">
+			</div>
+			<div class="block">
+				<virus-list :list="virus" color="green"></virus-list>
+			</div>
+			<div class="bottom-button-group">
+				<a class="button left" href="index.html">返回</a>
+				<div class="button" v-on:click="submit">提交</div>
+			</div>
+		</div>
+
+		<script src="dist/source_check.dist.js"></script>
+	</body>
+</html>
