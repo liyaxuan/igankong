@@ -84,9 +84,21 @@
 
 <script>
 	export default {
-		props: ['list', 'color'],
+		props: {
+			readOnly: {
+				default: false
+			},
+			list: {
+				default: []
+			}, 
+			color: {
+				default: 'green'
+			},
+		},
 		methods: {
 			select: function (index, value) {
+				if(this.readOnly)
+					return;
 				this.list[index].value = value;
 			}
 		}

@@ -93,9 +93,6 @@
 	import '../../less/common.less';
 	import '../../less/exposure_index.less';
 
-	import Vue from 'vue';
-	import $ from 'jquery';
-
 	import { host, login, getToken } from '../../js/ajax.js';
 	import { getDate, getTime } from '../../js/util.js';
 

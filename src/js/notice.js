@@ -1,9 +1,6 @@
 import '../less/common.less';
 import '../less/notice.less';
 
-import Vue from 'vue';
-import $ from 'jquery';
-
 import { getDate, diffDate } from './util.js';
 import { host, login, getToken, getUsername, notice, errorFilter } from './ajax.js';
 
@@ -21,7 +18,10 @@ login().then(function () {
 			isLayer: false,
 
 			forwardNotice: 0,
-			forwardDepartment: 0,
+			currentSecondary: {
+				id: 1,
+				name: ''
+			},
 			forwardScope: 1
 		},
 		filters: {
@@ -49,9 +49,6 @@ login().then(function () {
 			hideLayer: function () {
 				this.isLayer = false;
 			},
-			departmentChangedHandler: function (obj) {
-				this.forwardDepartment = obj.id;
-			},
 			forward: function () {
 				var self = this;
 
@@ -63,7 +60,7 @@ login().then(function () {
 					},
 					contentType: 'application/json;charset=UTF-8',
 					data: JSON.stringify({
-						department: this.forwardDepartment,
+						department: this.currentSecondary.id,
 						scope: this.forwardScope
 					})
 				})).then(function (res) {
@@ -81,29 +78,6 @@ login().then(function () {
 
 				list.forEach(function (item, index) {
 					item.time = item.time.split(' ')[0];
-
-					// if(index == 0) {
-					// 	item.time = today;
-					// 	item.isRead = 0;
-					// }
-					// else if(index == 1) {
-					// 	item.time = today;
-					// 	item.isRead = 1;
-					// }
-					// else if(index == 2) {
-					// 	item.time = '2016-11-24';
-					// 	item.isRead = 0;
-					// }
-					// else if(index == 3) {
-					// 	item.time = '2016-11-24';
-					// 	item.isRead = 1;
-					// }
-					// else if(index == 4) {
-					// 	item.isRead = 0;
-					// }
-					// else if(index == 5) {
-					// 	item.isRead = 1;
-					// }
 
 					item.overdate = diffDate(today, item.time);
 					item.open = false;

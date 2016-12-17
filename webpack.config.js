@@ -1,21 +1,43 @@
 var path = require('path');
-var less = require("less");
-var ROOT_PATH = path.resolve(__dirname);
-var DIST_PATH = path.resolve(ROOT_PATH, 'dist');
+var less = require('less');
 var webpack = require('webpack');
+var HtmlWebpackPlugin = require('html-webpack-plugin');
+
 var entry = {};
-['index', 'notice', 'plan', 'hand',
-'exposure_index', 'exposure_check', 'source_check', 'exposure_history', 'exposure_report',
-'report'].forEach(function (item) {
-    entry[item] = `./src/js/${item}.js`;
+var htmlwebpackplugin = [];
+
+var pages = ['index', 'notice', 'plan', 'hand',
+'exposure_index', 'exposure_check', 'exposure_history', 'exposure_report_get', 'exposure_report_post',
+'source_check', 'report', 'launch'];
+
+pages.forEach(function (page) {
+    entry[page] = `./src/js/${page}.js`;
 });
+
+// pages.forEach(function (page) {
+//     htmlwebpackplugin.push(new HtmlWebpackPlugin({
+//         template: `./src/template/${page}.html`,
+//         filename: `./${page}.html`,
+//         chunks: [page, 'vendor'],
+//         hash: true, 
+//     }));
+// });
+
+entry.vendor = ['vue', 'vue-resource', 'jquery'];
 
 module.exports = {
     entry: entry,
     output: {
-        path: DIST_PATH,
+        path: './dist',
         filename: '[name].dist.js'
     },
+    plugins: [
+        new webpack.ProvidePlugin({
+            $ : 'jquery',
+            Vue : 'vue',
+        }),
+        new webpack.optimize.CommonsChunkPlugin('vendor', 'vendor.js'),
+    ],
     module: {
         loaders: [
             {
@@ -42,7 +64,7 @@ module.exports = {
     },
     resolve: {
         alias: {
-            'vue$': 'vue/dist/vue.js'
+            vue$: 'vue/dist/vue.js'
         }
-    },
+    }
 };

@@ -1,9 +1,6 @@
 import '../less/common.less';
 import '../less/check.less';
 
-import Vue from 'vue';
-import $ from 'jquery';
-
 import { host, login, getToken, errorFilter } from './ajax.js';
 import { getDate, getTime, getParam } from './util.js';
 import VirusList from '../vue/virus-list.vue';

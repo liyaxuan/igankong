@@ -1,9 +1,7 @@
 import '../less/common.less';
 import '../less/plan.less';
 
-import Vue from 'vue';
-import $ from 'jquery';
-
+import { getDate, getTime } from './util.js';
 import { host, getUsername, getToken, login, sheet, clerk, errorFilter } from './ajax.js';
 
 login().then(function () {
@@ -12,8 +10,8 @@ login().then(function () {
 		data: {
 			username: getUsername(),
 			title: '',
-			date: '',
-			time: '',
+			date: getDate(),
+			time: getTime(),
 			sheet: [],
 			clerk: [],
 			note: ''
@@ -56,10 +54,6 @@ login().then(function () {
 			}
 		},
 		mounted: function () {
-			var date = new Date();
-			this.date = `${date.getFullYear()}-${date.getMonth()}-${date.getDate()}`;
-			this.time = `${date.getUTCHours()}:${date.getUTCMinutes()}:${date.getUTCSeconds()}`;
-
 			var self = this;
 
 			sheet.list().then(function (res) {
@@ -67,7 +61,7 @@ login().then(function () {
 			});
 
 			clerk.list().then(function (res) {
-				self.clerk = res.data;
+				self.clerk = res.data.items;
 			});
 		}
 	})				

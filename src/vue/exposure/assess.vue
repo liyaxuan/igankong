@@ -75,8 +75,7 @@
 	}
 </style>
 <script>
-	import $ from 'jquery';
-	import { host, getToken} from '../../js/ajax.js';
+	import { host, getToken, errorFilter } from '../../js/ajax.js';
 	import { getDate } from '../../js/util.js';
 
 	import Method from './method.vue';
@@ -119,7 +118,7 @@
 				for(var x in this.method)
 					data[x] = this.method.x;
 
-				$.ajax({
+				errorFilter($.ajax({
 					url: `${host}/weixin/expose_evaluate`,
 					type: 'POST',
 					data: JSON.stringify(data),
@@ -127,14 +126,7 @@
 					headers: {
 						Token: getToken(),
 					}						
-				}).then(function (res) {
-					if(res.error == 'succ') {
-						alert('提交成功');
-					}
-					else {
-						alert(`提交失败: ${res.error}`);
-					}
-				});
+				}));
 			}
 		}
 	}

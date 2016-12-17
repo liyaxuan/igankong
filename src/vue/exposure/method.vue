@@ -55,6 +55,8 @@
 	}
 
 	.grow-1 {
+		width: 0;
+		flex-shrink: 1;
 		flex-grow: 1;
 	}
 

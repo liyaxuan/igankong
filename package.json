@@ -23,6 +23,7 @@
     "gulp": "^3.9.1",
     "gulp-babel": "^6.1.2",
     "gulp-browserify": "^0.5.1",
+    "html-webpack-plugin": "^2.24.1",
     "less": "^2.7.1",
     "less-loader": "^2.2.3",
     "lodash": "^4.16.6",
@@ -37,9 +38,11 @@
     "vue-hot-reload-api": "^2.0.6",
     "vue-html-loader": "^1.2.3",
     "vue-loader": "^9.9.5",
+    "vue-resource": "^1.0.3",
     "vue-style-loader": "^1.0.0",
     "webpack": "^1.13.3",
     "webpack-dev-server": "^1.16.2",
+    "webpack-md5-hash": "^0.0.5",
     "webpack-stream": "^3.2.0"
   },
   "dependencies": {

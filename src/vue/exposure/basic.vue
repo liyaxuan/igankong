@@ -8,7 +8,7 @@
 			<div class="cf"></div>
 		</div>
 		<div class="line flex center">
-			<department-select :read-only="departmentSelecTreadOnly" :current-main="currentMain" :current-secondary="currentSecondary"></department-select>
+			<department-select :read-only="readOnly" :current-main="currentMain" :current-secondary="currentSecondary"></department-select>
 		</div>
 		<div class="line flex center">
 			<div class="title">年龄</div>
@@ -34,10 +34,12 @@
 			</div>
 			<div class="cf"></div>
 		</div>
-		<div class="line flex center">
+		<div class="line flex center last">
 			<div class="title">联系电话</div>
 			<input class="text-input grow-1" type="text" placeholder="联系电话" v-model="phone" v-bind:disabled="readOnly">
 		</div>
+
+		<div class="submit-button" v-show="!readOnly" v-on:click="submit">保存并继续填写</div>
 	</div>
 </template>
 <style lang="less" scoped>
@@ -47,7 +49,7 @@
 		margin-bottom: 8px;
 
 		&.last {
-			margin-bottom: 8px;
+			margin-bottom: 0;
 		}
 
 		&.flex {
@@ -82,25 +84,35 @@
 	import DepartmentSelect from '../department-select.vue';
 	import CheckboxList from '../checkbox-list.vue';
 
-	import { basic, exposure } from '../../js/ajax.js';
+	import { host, getToken, basic, exposure, errorFilter } from '../../js/ajax.js';
 
 	export default {
-		props: ['id', 'readOnly'],
+		props: {
+			id: {},
+			readOnly: {
+				default: true
+			}
+		},
 		data: function () {
 			return {
-				departmentSelecTreadOnly: true,
+				type: 1,
 
 				name: '',
 				gender: 1,
-				age: 0,
-				workingYears: 0,
+				age: 1,
+				workingYears: 1,
 				phone: '',
 
 				jobCode: 1,
 				titleCode: 1,
 
-				currentMain: '',
-				currentSecondary: '',
+				currentMain: {
+					name: ''
+				},
+				currentSecondary: {
+					id: 1,
+					name: ''
+				},
 
 				title: [],
 				position: []
@@ -115,13 +127,64 @@
 				if(this.readOnly == 'true')
 					return;
 				this.gender = gender;
+			},
+			submit: function () {
+				var self = this;
+
+				errorFilter(this.$http.post(`${host}/weixin/expose_basic`, JSON.stringify({
+					type: this.type,
+					name: this.name,    //姓名
+					sex: this.gender,      //性别: 1为男性, 2为女性
+					age: this.age,    //年龄
+					workAge: this.workingYears, //工龄
+					did: this.currentSecondary.id,     //子科室id
+					mainDepartment: this.currentMain.name,  //主科室名称
+					subDepartment: this.currentSecondary.name, //子科室名称
+					jobCode: this.jobCode,             //职称Code
+					titleCode: this.titleCode,           //岗位Code
+					phone: this.phone + ''
+				}), {
+					headers: {
+						Token: getToken(),
+						contentType: 'application/json;charset=UTF-8',
+					}
+				})).then(function (res) {
+					var exposureId = res.body.data;
+					alert(exposureId);
+					self.$emit('exposure-id-changed', exposureId);
+				});
 			}
 		},
 		mounted: function () {
 			var self = this;
 
+			basic.listTitle().then(function (res) {
+				self.title = res.data.map(function (item, index) {
+					return {
+						content: item.name,
+						isSelected: index == 0 ? true : false,
+						code: item.code,
+					}
+				});
+
+				return basic.listPosition();
+			}).then(function (res) {
+				self.position = res.data.map(function (item, index) {
+					return {
+						content: item.name,				
+						isSelected: index == 0 ? true : false,
+						code: item.code,		
+					}
+				})
+			});
+
+			if(!this.readOnly)
+				return;
+
 			exposure.getInfo(this.id).then(function (res) {
 				var data = res.data.exposeBasic;
+
+				self.type = data.type;
 
 				self.name = data.name;
 				self.gender = data.sex;
@@ -135,25 +198,13 @@
 				self.jobCode = data.jobCode;
 				self.titleCode = data.titleCode;
 
-				return basic.listTitle();
-			}).then(function (res) {
-				self.title = res.data.map(function (item) {
-					return {
-						content: item.name,
-						isSelected: item.code == self.titleCode,
-						code: item.code,
-					}
+				self.title.forEach(function (item) {
+					item.isSelected = item.code == self.jobCode
 				});
 
-				return basic.listPosition();
-			}).then(function (res) {
-				self.position = res.data.map(function (item) {
-					return {
-						content: item.name,				
-						isSelected: item.code == self.jobCode,
-						code: item.code,		
-					}
-				})
+				self.position.forEach(function (item) {
+					item.isSelected = item.code == self.jobCode
+				});					
 			});
 		}
 	}

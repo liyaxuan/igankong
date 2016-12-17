@@ -16,7 +16,26 @@
 	import { department } from '../js/ajax.js';
 
 	export default {
-		props: ['readOnly', 'currentMain', 'currentSecondary'],
+		props: {
+			readOnly: {
+				defalut: true
+			},
+			currentMain: {
+				default: function () {
+					return {
+						name: ''
+					};
+				}
+			},
+			currentSecondary: {
+				default: function () {
+					return {
+						id: 1,
+						name: ''
+					};
+				}
+			}
+		},
 		data: function () {
 			return {
 				main: [],
@@ -27,23 +46,23 @@
 			mainChanged: function (event) {
 				var self = this;
 				var main = event.target.value;
+
 				department.listSecondary(main).then(function (res) {
 					self.secondary = res.data;
 
-					self.$emit('department-changed', self.secondary[0]);
+					self.currentMain.name = main;
 				});
 			},
 			secondaryChanged: function (event) {
 				var option = event.target.querySelectorAll('option');
-				var obj = {};
+
 				for(var i = 0; i < option.length; i++) {
 					if(option[i].selected) {
-						obj = this.secondary[i];
+						this.currentSecondary.id = this.secondary[i].id;
+						this.currentSecondary.name = this.secondary[i].name;
 						break;
 					}
 				}
-
-				this.$emit('department-changed', obj);
 			}
 		},
 		mounted: function () {
@@ -52,11 +71,14 @@
 			department.listMain().then(function (res) {
 				self.main = res.data;
 
+				self.currentMain.name = self.main[0];
+
 				return department.listSecondary(self.main[0]);
 			}).then(function (res) {
 				self.secondary = res.data;
 
-				self.$emit('department-changed', self.secondary[0]);
+				self.currentSecondary.id = self.secondary[0].id;
+				self.currentSecondary.name = self.secondary[0].name;
 			});		
 		}		
 	}

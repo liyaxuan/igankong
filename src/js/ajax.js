@@ -1,5 +1,3 @@
-import $ from 'jquery';
-
 var host = 'http://121.42.137.63:8080';
 var username = 'gaozhiqiang';
 var password = 'abcdefgh';
@@ -21,47 +19,47 @@ function getToken () {
 };
 
 var login = (function () {
-	// return function () {
-	// 	return new Promise(function (resolve) {
-	// 		resolve();
-	// 	});		
-	// }
-	sessionStorage.username = username;
-	sessionStorage.password = password;
-
-	function updateToken() {
-		$.ajax({
-			url: `${host}/token`,
-			data: {
-				username: username,
-				password: password
-			}
-		}).then(function (res) {
-			sessionStorage.token = res.data.token;
-		});
-	}
-
-	setInterval(updateToken, 7200*1000);
-	updateToken();
-
 	return function () {
-		if(sessionStorage.token)
-			return new Promise(function (resolve) {
-				resolve(sessionStorage.token);
-			});
-		else
-			return $.ajax({
-				url: `${host}/token`,
-				data: {
-					username: username,
-					password: password
-				}
-			}).then(function (res) {
-				return new Promise(function (resolve) {
-					resolve(res.data.token);
-				});
-			});
+		return new Promise(function (resolve) {
+			resolve();
+		});		
 	}
+	// sessionStorage.username = username;
+	// sessionStorage.password = password;
+
+	// function updateToken() {
+	// 	$.ajax({
+	// 		url: `${host}/token`,
+	// 		data: {
+	// 			username: username,
+	// 			password: password
+	// 		}
+	// 	}).then(function (res) {
+	// 		sessionStorage.token = res.data.token;
+	// 	});
+	// }
+
+	// setInterval(updateToken, 7200*1000);
+	// updateToken();
+
+	// return function () {
+	// 	if(sessionStorage.token)
+	// 		return new Promise(function (resolve) {
+	// 			resolve(sessionStorage.token);
+	// 		});
+	// 	else
+	// 		return $.ajax({
+	// 			url: `${host}/token`,
+	// 			data: {
+	// 				username: username,
+	// 				password: password
+	// 			}
+	// 		}).then(function (res) {
+	// 			return new Promise(function (resolve) {
+	// 				resolve(res.data.token);
+	// 			});
+	// 		});
+	// }
 })();
 
 var notice = {
@@ -103,7 +101,7 @@ var department = {
 var clerk = {
 	list: function () {
 		return $.ajax({
-			url: `${host}/role_list`,
+			url: `${host}/weixin/gklist`,
 			type: 'GET',
 			headers: {
 				Token: getToken()
@@ -173,15 +171,18 @@ var exposure = {
 }
 
 function errorFilter(promise) {
-	promise.then(function (res) {
-		if(res.error == 'succ') {
+	return promise.then(function (res) {
+		var error = res.error || res.body.error;
+
+		if(error == 'succ') {
 			alert('提交成功');
 			return new Promise(function (resolve) {
 				resolve(res);
 			});		
 		}
 		else
-			alert('提交失败: ' + res.error);
+			alert('提交失败, 错误代码: ' + error);
 	});
 }
-export { host, getUsername, getToken, login, notice, department, clerk, sheet, basic, exposure, errorFilter };
+
+export { host, getUsername, getToken, login, department, basic, sheet, clerk, notice, exposure, errorFilter };

@@ -1,10 +1,9 @@
 import '../less/common.less';
 import '../less/index.less';
 
-import Vue from 'vue';
-import $ from 'jquery';
 import { host, login, getToken, notice } from './ajax.js';
 import { getDate, getTime, diffDate } from './util.js';
+
 import IndexList from '../vue/index-list.vue';
 
 login().then(function (token) {

@@ -171,7 +171,6 @@
 	}
 </style>
 <script>
-	import $ from 'jquery';
 	import { host, errorFilter, getToken } from '../js/ajax.js';
 
 	export default {

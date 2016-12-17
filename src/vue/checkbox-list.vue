@@ -1,7 +1,7 @@
 <template>
 	<div class="checkbox-list">
-		<div class="item" v-for="item in list">
-			<div class="checkbox" v-bind:class="{ 'selected': item.isSelected, 'arc': type == 'arc', 'green': color == 'green' }">
+		<div class="item" v-for="(item, index) in list">
+			<div class="checkbox" v-bind:class="{ 'selected': item.isSelected, 'arc': type == 'arc', 'green': color == 'green' }" v-on:click="select(index)">
 				<div class="inner"></div>
 			</div>
 			<div>{{item.content}}</div>
@@ -38,9 +38,37 @@
 </style>
 <script>
 	export default {
-		props: ['list', 'color', 'type'],
+		props: {
+			readyOnly: {
+				default: true,
+			},
+			list: {
+				default: []
+			},
+			color: {
+				default: 'green'
+			},
+			type: {
+				default: 'arc'
+			},
+			isMultiple: {
+				default: false
+			}
+		},
 		data: function () {
 			return {};
+		},
+		methods: {
+			select: function (index) {
+				if(this.isMultiple)
+					this.list[index].isSelected = !this.list[index].isSelected;
+				else {
+					this.list.forEach(function (item) {
+						item.isSelected = false;
+					});
+					this.list[index].isSelected = true;
+				}
+			}
 		}
 	}
 </script>

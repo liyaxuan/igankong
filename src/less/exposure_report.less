@@ -1,6 +1,6 @@
 @import './variable.less';
 
-.container {
+.vue-container {
 	>.block {
 		margin-bottom: 8px;
 		border: 1px solid @green;
@@ -17,8 +17,35 @@
 
 		>.body {
 			padding: 8px;
-
-
 		}
+	}
+}
+
+.submit-button {
+	height: 16px;
+	line-height: 16px;
+	margin-top: 8px;
+	padding: 8px;
+	background-color: @green;
+	border-radius: 4px;
+
+	text-align: center;
+	color: #ffffff;
+
+
+}
+
+.signature-button {
+	width: 64px;
+	margin: 0 auto;
+	text-align: center;
+	>.iconfont {
+		line-height: 48px;
+		font-size: 48px;
+		
+	}
+	>.text {
+		line-height: 16px;
+		font-size: 14px;
 	}
 }

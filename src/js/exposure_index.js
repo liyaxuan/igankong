@@ -1,9 +1,6 @@
 import '../less/common.less';
 import '../less/exposure_index.less';
 
-import Vue from 'vue';
-import $ from 'jquery';
-
 import { host, login, getToken } from './ajax.js';
 import { getDate, getTime } from './util.js';
 import History from '../vue/exposure/history.vue';
@@ -37,7 +34,7 @@ login().then(function () {
                 self.review = res.data.map(function (item) {
                     return {
                         content: item.name + '上报了职业暴露, 请立即确认',
-                        href: `exposure_report.html?exposureId=${item.id}`
+                        href: `exposure_report_get.html?exposureId=${item.id}`
                     };
                 });
             });

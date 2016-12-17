@@ -12,7 +12,7 @@
 			<notice-list :list="list" v-on:show-layer="showLayerHandler" v-on:read="readHandler"></notice-list>
 			<div class="layer" v-show="isLayer">
 				<div class="box">
-					<department-select v-on:department-changed="departmentChangedHandler"></department-select>
+					<department-select :current-secondary="currentSecondary"></department-select>
 					<select v-model="forwardScope">
 						<option value="1">全体医生</option>
 						<option value="2">感控医生</option>
@@ -25,6 +25,8 @@
 			</div>
 			<a class="button" href="index.html">返回</a>			
 		</div>
+		<script src="dist/vendor.js"></script>
+		<script src="dist/launch.dist.js"></script>
 		<script src="dist/notice.dist.js"></script>
 	</body>
 </html>

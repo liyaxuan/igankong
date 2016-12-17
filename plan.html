@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 		<title>制定计划</title>
@@ -17,7 +17,7 @@
 				<option v-bind:value="index" v-for="(item, index) in sheet">{{item.name}}</option>
 			</select>			
 			<select id="clerk" class="input clerk" multiple>
-				<option v-bind:value="index" v-for="(item, index) in clerk">{{item.name}}</option>
+				<option v-bind:value="index" v-for="(item, index) in clerk">{{item.username}}</option>
 			</select>			
 			<textarea class="input" rows="5" placeholder="请输入备注信息" v-model="note"></textarea>
 			<div class="button-group">
@@ -25,7 +25,8 @@
 				<div class="button" v-on:click="submit">确定</div>			
 			</div>			
 		</div>
-
+		<script src="dist/vendor.js"></script>
+		<script src="dist/launch.dist.js"></script>
 		<script src="dist/plan.dist.js"></script>
 	</body>
 </html>

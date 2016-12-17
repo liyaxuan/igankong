@@ -7,7 +7,7 @@ function getDate() {
 function getTime() {
 	var date = new Date();
 
-	return `${date.getUTCHours()}:${date.getUTCMinutes()}:${date.getUTCSeconds()}`;
+	return `${date.getHours()}:${date.getMinutes()}:${date.getSeconds()}`;
 }
 
 function diffDate(a, b) { 
@@ -47,4 +47,12 @@ function mutipleSelect(constArray, codeArray) {
 	});
 }
 
-export { getDate, diffDate, getTime, getParam, transform, mutipleSelect };
+function getMutipleSelect(array) {
+	return array.filter(function (item) {
+		return item.isSelected;
+	}).map(function (item) {
+		return item.code;
+	});
+}
+
+export { getDate, diffDate, getTime, getParam, transform, mutipleSelect, getMutipleSelect };

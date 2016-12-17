@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
     <head>
         <meta charset="UTF-8">
         <title>职业暴露</title>
@@ -10,18 +10,18 @@
         <div class="container">
             <div class="header">本年度累积发生职业暴露{{total}}例, 其中锐器伤{{wound}}例, 血液体液暴露{{blood}}例</div>
             <div class="nav">
-                <div class="item">
+                <a class="item" href="exposure_report_post.html?type=2">
                     <div class="icon-container">
                         <i class="iconfont">&#xe621;</i>
                     </div>                  
                     <div class="text">利器上报</div>
-                </div>
-                <div class="item">
+                </a>
+                <a class="item" href="exposure_report_post.html?type=1">
                     <div class="icon-container">
                         <i class="iconfont">&#xe620;</i>
                     </div>            
                     <div class="text">血体液上报</div>
-                </div>
+                </a>
                 <a class="item" href="exposure_history.html">
                     <div class="icon-container">
                         <i class="iconfont">&#xe793;</i>
@@ -37,7 +37,6 @@
                     <div class="cf"></div>
                 </div>            
             </div>
-
             <div class="block">
                 <div class="tag-header green">提醒事件</div>
                 <div class="item" v-for="(item, index) in remind" v-bind:class="{ 'last': index == remind.length - 1 }">
@@ -46,12 +45,13 @@
                     <div class="cf"></div>
                 </div>            
             </div>
-
             <div class="block">
                 <div class="tag-header green">个人暴露历史</div>
                 <exposure-history></exposure-history>        
             </div>            
         </div>
+        <script src="dist/vendor.js"></script>
+        <script src="dist/launch.dist.js"></script>
         <script src="dist/exposure_index.dist.js"></script>
     </body>
 </html>
